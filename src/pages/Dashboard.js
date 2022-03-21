@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-import CTA from '../components/CTA'
 import InfoCard from '../components/Cards/InfoCard'
 import ChartCard from '../components/Chart/ChartCard'
 import { Doughnut, Line } from 'react-chartjs-2'
 import ChartLegend from '../components/Chart/ChartLegend'
 import PageTitle from '../components/Typography/PageTitle'
-import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from '../icons'
+import { ChatIcon, CartIcon, PeopleIcon, ChartsIcon } from '../icons'
 import RoundIcon from '../components/RoundIcon'
 import response from '../utils/demo/tableData'
 import {
@@ -17,7 +16,6 @@ import {
   TableCell,
   TableRow,
   TableFooter,
-  Avatar,
   Badge,
   Pagination,
 } from '@windmill/react-ui'
@@ -32,6 +30,14 @@ import {
 function Dashboard() {
   const [page, setPage] = useState(1)
   const [data, setData] = useState([])
+
+  const statusToShow={
+    'primary': 'Mild',
+    'warning': 'Moderately Severe',
+    'success': 'None-Minimal',
+    'danger': 'Severe',
+    'neutral': 'Moderate',
+  }
 
   // pagination setup
   const resultsPerPage = 10
@@ -52,11 +58,10 @@ function Dashboard() {
     <>
       <PageTitle>Dashboard</PageTitle>
 
-      <CTA />
 
       {/* <!-- Cards --> */}
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <InfoCard title="Total clients" value="6389">
+        <InfoCard title="Total Users" value="638">
           <RoundIcon
             icon={PeopleIcon}
             iconColorClass="text-orange-500 dark:text-orange-100"
@@ -65,16 +70,16 @@ function Dashboard() {
           />
         </InfoCard>
 
-        <InfoCard title="Account balance" value="$ 46,760.89">
+        <InfoCard title="Total Tests taken" value="567">
           <RoundIcon
-            icon={MoneyIcon}
+            icon={ChartsIcon}
             iconColorClass="text-green-500 dark:text-green-100"
             bgColorClass="bg-green-100 dark:bg-green-500"
             className="mr-4"
           />
         </InfoCard>
 
-        <InfoCard title="New sales" value="376">
+        <InfoCard title="New Registrations this week" value="76">
           <RoundIcon
             icon={CartIcon}
             iconColorClass="text-blue-500 dark:text-blue-100"
@@ -83,7 +88,7 @@ function Dashboard() {
           />
         </InfoCard>
 
-        <InfoCard title="Pending contacts" value="35">
+        <InfoCard title="Pending Appointments" value="35">
           <RoundIcon
             icon={ChatIcon}
             iconColorClass="text-teal-500 dark:text-teal-100"
@@ -98,7 +103,7 @@ function Dashboard() {
           <TableHeader>
             <tr>
               <TableCell>Client</TableCell>
-              <TableCell>Amount</TableCell>
+              <TableCell>Age</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Date</TableCell>
             </tr>
@@ -108,18 +113,17 @@ function Dashboard() {
               <TableRow key={i}>
                 <TableCell>
                   <div className="flex items-center text-sm">
-                    <Avatar className="hidden mr-3 md:block" src={user.avatar} alt="User image" />
                     <div>
                       <p className="font-semibold">{user.name}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">{user.job}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{user.diagnosis}</p>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">$ {user.amount}</span>
+                  <span className="text-sm">{user.age} years</span>
                 </TableCell>
                 <TableCell>
-                  <Badge type={user.status}>{user.status}</Badge>
+                  <Badge type={user.status}>{statusToShow[user.status]}</Badge>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span>
@@ -140,12 +144,12 @@ function Dashboard() {
 
       <PageTitle>Charts</PageTitle>
       <div className="grid gap-6 mb-8 md:grid-cols-2">
-        <ChartCard title="Revenue">
+        <ChartCard title="Test Categories">
           <Doughnut {...doughnutOptions} />
           <ChartLegend legends={doughnutLegends} />
         </ChartCard>
 
-        <ChartCard title="Traffic">
+        <ChartCard title="Tests Traffic">
           <Line {...lineOptions} />
           <ChartLegend legends={lineLegends} />
         </ChartCard>

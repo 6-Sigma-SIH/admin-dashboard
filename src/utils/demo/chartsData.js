@@ -1,12 +1,13 @@
 export const doughnutLegends = [
-  { title: 'Shirts', color: 'bg-blue-500' },
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
+  { title: 'Depression', color: 'bg-blue-500' },
+  { title: 'Anxiety', color: 'bg-teal-600' },
+  { title: 'ADHD', color: 'bg-purple-600' },
 ]
 
 export const lineLegends = [
-  { title: 'Organic', color: 'bg-teal-600' },
-  { title: 'Paid', color: 'bg-purple-600' },
+  { title: 'Depression', color: 'bg-teal-600' },
+  { title: 'Anxiety', color: 'bg-purple-600' },
+  { title: 'ADHD', color: 'bg-blue-500' },
 ]
 
 export const barLegends = [
@@ -18,7 +19,7 @@ export const doughnutOptions = {
   data: {
     datasets: [
       {
-        data: [33, 33, 33],
+        data: [22, 24, 16],
         /**
          * These colors come from Tailwind CSS palette
          * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
@@ -27,7 +28,7 @@ export const doughnutOptions = {
         label: 'Dataset 1',
       },
     ],
-    labels: ['Shoes', 'Shirts', 'Bags'],
+    labels: ['Depression', 'Anxiety', 'ADHD'],
   },
   options: {
     responsive: true,
@@ -43,7 +44,7 @@ export const lineOptions = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
-        label: 'Organic',
+        label: 'Depression',
         /**
          * These colors come from Tailwind CSS palette
          * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
@@ -54,7 +55,7 @@ export const lineOptions = {
         fill: false,
       },
       {
-        label: 'Paid',
+        label: 'Anxiety',
         fill: false,
         /**
          * These colors come from Tailwind CSS palette
@@ -64,6 +65,13 @@ export const lineOptions = {
         borderColor: '#7e3af2',
         data: [24, 50, 64, 74, 52, 51, 65],
       },
+      {
+        label: 'ADHD',
+        backgroundColor: '#c026d3',
+        borderColor: '#c026d3',
+        data: [47, 52, 30, 34, 37, 53, 57],
+        fill: false,
+      }
     ],
   },
   options: {

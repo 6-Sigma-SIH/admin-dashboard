@@ -15,7 +15,7 @@ function Layout() {
   let location = useLocation()
 
   useEffect(() => {
-    closeSidebar()
+    closeSidebar()// eslint-disable-next-line
   }, [location])
 
   return (
